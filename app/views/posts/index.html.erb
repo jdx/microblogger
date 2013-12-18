@@ -1,0 +1,22 @@
+<h1>Posts</h1>
+
+<ul>
+  <% @posts.each do |post| %>
+  <li>
+    <%= post.body %>
+    <% if post.category %>
+      <strong>
+        <a href='/categories/<%= post.category.id %>'>
+          <%= post.category.name %>
+        </a>
+      </strong>
+    <% end %>
+  </li>
+  <% end %>
+</ul>
+
+<%= form_for Post.new do |form| %>
+  <%= form.text_field :body %>
+  <%= form.collection_select :category_id, Category.all, :id, :name %>
+  <%= form.submit "Submit" %>
+<% end %>
